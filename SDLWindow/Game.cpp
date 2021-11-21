@@ -1,8 +1,10 @@
 #include "Game.h"
+#include "GameObject.h"
 #include "TextureManager.h"
 
-SDL_Texture* playerTex;
-SDL_Rect srcR, destR;
+
+GameObject* player;
+GameObject* enemy;
 
 Game::Game() {
 
@@ -28,6 +30,8 @@ void Game::init(const char* title, int xpos, int ypos, int widht, int height, bo
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
+	isRunning = false;
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		std::cout << "SDL Initialized..." << std::endl;
@@ -46,11 +50,9 @@ void Game::init(const char* title, int xpos, int ypos, int widht, int height, bo
 
 		isRunning = true;
 	}
-	else {
-		isRunning = false;
-	}
 
-	playerTex = TextureManager::LoadTexture("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png", renderer);
+	player = new GameObject("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png", renderer, 0, 0);
+	enemy = new GameObject("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Fall (32x32).png", renderer, 100, 100);
 }
 
 /// <summary>
@@ -73,8 +75,8 @@ void Game::handleEvents() {
 /// Atualiza as coisas
 /// </summary>
 void Game::update() {
-	destR.h = 64;
-	destR.w = 64;
+	player->Update();
+	enemy->Update();
 }
 
 /// <summary>
@@ -85,7 +87,8 @@ void Game::render() {
 	// Begin
 
 	// Renderizamos coisas aqui
-	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+	player->Render();
+	enemy->Render();
 
 	// End
 	SDL_RenderPresent(renderer);
