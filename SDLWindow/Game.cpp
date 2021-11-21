@@ -1,5 +1,8 @@
 #include "Game.h"
 
+SDL_Texture* playerTex;
+SDL_Rect srcR, destR;
+
 Game::Game() {
 
 }
@@ -45,6 +48,8 @@ void Game::init(const char* title, int xpos, int ypos, int widht, int height, bo
 	else {
 		isRunning = false;
 	}
+
+	playerTex = IMG_LoadTexture(renderer, "C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png");
 }
 
 /// <summary>
@@ -63,14 +68,25 @@ void Game::handleEvents() {
 	}
 }
 
-void Game::update() {}
+/// <summary>
+/// Atualiza as coisas
+/// </summary>
+void Game::update() {
+	destR.h = 64;
+	destR.w = 64;
+}
 
 /// <summary>
 /// Renderiza coisas
 /// </summary>
 void Game::render() {
 	SDL_RenderClear(renderer);
+	// Begin
+
 	// Renderizamos coisas aqui
+	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+
+	// End
 	SDL_RenderPresent(renderer);
 }
 
