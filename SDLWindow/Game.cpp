@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "TextureManager.h"
 
 SDL_Texture* playerTex;
 SDL_Rect srcR, destR;
@@ -49,7 +50,7 @@ void Game::init(const char* title, int xpos, int ypos, int widht, int height, bo
 		isRunning = false;
 	}
 
-	playerTex = IMG_LoadTexture(renderer, "C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png");
+	playerTex = TextureManager::LoadTexture("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png", renderer);
 }
 
 /// <summary>
