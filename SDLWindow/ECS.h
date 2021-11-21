@@ -55,7 +55,7 @@ public:
 
 	template <typename T> bool HasComponent() const
 	{
-		return componentBitSet[getComponentTypeID<T>()];
+		return componentBitSet[GetComponentTypeID<T>()];
 	}
 
 	template <typename T, typename... TArgs> T& AddComponent(TArgs&&... mArgs)
