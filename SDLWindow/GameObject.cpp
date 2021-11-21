@@ -9,18 +9,13 @@ GameObject::GameObject(const char* textureSheet, int x, int y)
 	ypos = y;
 }
 
-GameObject::~GameObject()
-{
-
-}
-
 void GameObject::Update()
 {
 	xpos++;
 	ypos++;
 
-	srcRect.h = 64;
-	srcRect.w = 64;
+	srcRect.h = 32;
+	srcRect.w = 32;
 	srcRect.x = 0;
 	srcRect.y = 0;
 

@@ -21,6 +21,7 @@ inline ComponentID GetComponentTypeID()
 
 template <typename T> inline inline ComponentID GetComponentTypeID() noexcept
 {
+	static_assert (std::is_base_of<Component, T>::value, "");
 	static ComponentID typeID = GetComponentTypeID();
 	return typeID;
 }
@@ -32,7 +33,7 @@ using ComponentArray = std::array<Component*, maxComponents>;
 
 class Component {
 public:
-	Entity* entity;
+	Entity *entity;
 
 	virtual void Init() {}
 	virtual void Update() {}
@@ -42,14 +43,24 @@ public:
 };
 
 class Entity {
+private:
+	bool active = true;
+	std::vector<std::unique_ptr<Component>> components;
+
+	ComponentArray componentArray;
+	ComponentBitSet componentBitSet;
+
 public:
 	void Update()
 	{
 		for (auto& c : components) c->Update();
+	}
+
+	void Draw()
+	{
 		for (auto& c : components) c->Draw();
 	}
 
-	void Draw() {}
 	bool IsActive() { return active; }
 	void Destroy() { active = false; }
 
@@ -77,14 +88,6 @@ public:
 		auto ptr(componentArray[GetComponentTypeID<T>()]);
 		return *static_cast<T*>(ptr);
 	}
-
-private:
-	bool active = true;
-	std::vector<std::unique_ptr<Component>> components;
-
-	ComponentArray componentArray;
-	ComponentBitSet componentBitSet;
-
 };
 
 class Manager
@@ -108,7 +111,6 @@ public:
 			e->Draw();
 		}
 	}
-
 
 	void Refresh()
 	{

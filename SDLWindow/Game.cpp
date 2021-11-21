@@ -1,19 +1,14 @@
-#include "ECS.h"
-#include "Components.h"
 #include "Game.h"
-#include "GameObject.h"
 #include "Map.h"
 #include "TextureManager.h"
-
-GameObject* player;
-GameObject* enemy;
+#include "Components.h"
 
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 
 Manager manager;
-auto& newPlayer(manager.AddEntity());
+auto& player(manager.AddEntity());
 
 Game::Game() {
 
@@ -60,11 +55,10 @@ void Game::Init(const char* title, int xpos, int ypos, int widht, int height, bo
 		isRunning = true;
 	}
 
-	player = new GameObject("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png", 0, 0);
-	enemy = new GameObject("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Fall (32x32).png", 100, 100);
 	map = new Map();
 
-	newPlayer.AddComponent<PositionComponent>();
+	player.AddComponent<PositionComponent>();
+	player.AddComponent<SpriteComponent>("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png");
 }
 
 /// <summary>
@@ -87,11 +81,10 @@ void Game::HandleEvents() {
 /// Atualiza as coisas
 /// </summary>
 void Game::Update() {
-	player->Update();
-	enemy->Update();
+	manager.Refresh();
 	manager.Update();
 
-	std::cout << "Player Position: " << newPlayer.GetComponent<PositionComponent>().x() << "," << newPlayer.GetComponent<PositionComponent>().y() << std::endl;
+	std::cout << "Player Position: " << player.GetComponent<PositionComponent>().x() << "," << player.GetComponent<PositionComponent>().y() << std::endl;
 }
 
 /// <summary>
@@ -103,8 +96,7 @@ void Game::Render() {
 
 	// Renderizamos coisas aqui
 	map->DrawMap();
-	player->Render();
-	enemy->Render();
+	manager.Draw();
 
 	// End
 	SDL_RenderPresent(renderer);
