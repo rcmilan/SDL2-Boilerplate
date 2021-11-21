@@ -1,10 +1,14 @@
 #include "Game.h"
 #include "GameObject.h"
+#include "Map.h"
 #include "TextureManager.h"
-
 
 GameObject* player;
 GameObject* enemy;
+
+Map* map;
+
+SDL_Renderer* Game::renderer = nullptr;
 
 Game::Game() {
 
@@ -23,7 +27,7 @@ Game::~Game() {
 /// <param name="widht">Largura</param>
 /// <param name="height">Altura</param>
 /// <param name="fullscreen">Flag Fullscreen</param>
-void Game::init(const char* title, int xpos, int ypos, int widht, int height, bool fullscreen) {
+void Game::Init(const char* title, int xpos, int ypos, int widht, int height, bool fullscreen) {
 
 	int flags = 0;
 	if (fullscreen) {
@@ -51,14 +55,15 @@ void Game::init(const char* title, int xpos, int ypos, int widht, int height, bo
 		isRunning = true;
 	}
 
-	player = new GameObject("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png", renderer, 0, 0);
-	enemy = new GameObject("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Fall (32x32).png", renderer, 100, 100);
+	player = new GameObject("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png", 0, 0);
+	enemy = new GameObject("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Fall (32x32).png", 100, 100);
+	map = new Map();
 }
 
 /// <summary>
 /// Trata eventos do SDL
 /// </summary>
-void Game::handleEvents() {
+void Game::HandleEvents() {
 	SDL_Event evt;
 	SDL_PollEvent(&evt);
 
@@ -74,19 +79,21 @@ void Game::handleEvents() {
 /// <summary>
 /// Atualiza as coisas
 /// </summary>
-void Game::update() {
+void Game::Update() {
 	player->Update();
 	enemy->Update();
+	//map->LoadMap();
 }
 
 /// <summary>
 /// Renderiza coisas
 /// </summary>
-void Game::render() {
+void Game::Render() {
 	SDL_RenderClear(renderer);
 	// Begin
 
 	// Renderizamos coisas aqui
+	map->DrawMap();
 	player->Render();
 	enemy->Render();
 
@@ -97,7 +104,7 @@ void Game::render() {
 /// <summary>
 /// Faz a limpa
 /// </summary>
-void Game::clean() {
+void Game::Clean() {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();

@@ -12,15 +12,15 @@ int main(int argc, char* argv[])
 	int frameTime;
 
 	game = new Game();
-	game->init("Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->Init("Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
 
-	while (game->running())
+	while (game->Running())
 	{
 		frameStart = SDL_GetTicks();
 
-		game->handleEvents();
-		game->update();
-		game->render();
+		game->HandleEvents();
+		game->Update();
+		game->Render();
 
 		frameTime = SDL_GetTicks() - frameStart;
 
@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	game->clean();
+	game->Clean();
 	//game->~Game();
 
 	return 0;

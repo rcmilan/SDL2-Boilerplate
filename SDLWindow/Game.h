@@ -9,18 +9,19 @@ public:
 	Game();
 	~Game();
 
-	void init(const char* title, int xpos, int ypos, int widht, int height, bool fullscreen);
-	void handleEvents();
-	void update();
-	void render();
-	void clean();
+	void Init(const char* title, int xpos, int ypos, int widht, int height, bool fullscreen);
+	void HandleEvents();
+	void Update();
+	void Render();
+	void Clean();
 
-	bool running() { return isRunning; };
+	bool Running() { return isRunning; };
+
+
+	static SDL_Renderer* renderer;
 
 private:
 	bool isRunning;
 	SDL_Window* window;
-	SDL_Renderer* renderer;
-
 };
 
