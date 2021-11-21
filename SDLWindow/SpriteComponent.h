@@ -6,7 +6,7 @@
 class SpriteComponent :public Component
 {
 private:
-	PositionComponent* position;
+	TransformComponent* position;
 	SDL_Texture* texture;
 	SDL_Rect srcRect, destRect;
 
@@ -19,7 +19,7 @@ public:
 
 	void Init() override
 	{
-		position = &entity->GetComponent<PositionComponent>();
+		position = &entity->GetComponent<TransformComponent>();
 
 		srcRect.x = srcRect.y = 0;
 		srcRect.w = srcRect.h = 32;

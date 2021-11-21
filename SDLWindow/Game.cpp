@@ -57,7 +57,7 @@ void Game::Init(const char* title, int xpos, int ypos, int widht, int height, bo
 
 	map = new Map();
 
-	player.AddComponent<PositionComponent>();
+	player.AddComponent<TransformComponent>();
 	player.AddComponent<SpriteComponent>("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png");
 }
 
@@ -84,7 +84,7 @@ void Game::Update() {
 	manager.Refresh();
 	manager.Update();
 
-	std::cout << "Player Position: " << player.GetComponent<PositionComponent>().x() << "," << player.GetComponent<PositionComponent>().y() << std::endl;
+	std::cout << "Player Position: " << player.GetComponent<TransformComponent>().x() << "," << player.GetComponent<TransformComponent>().y() << std::endl;
 }
 
 /// <summary>
