@@ -1,6 +1,7 @@
 #include "Map.h"
 #include "TextureManager.h"
 
+//deve vir dum arquivo de configuração
 int defaultMap[20][25] = {
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
