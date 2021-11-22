@@ -11,11 +11,9 @@ Manager manager;
 auto& player(manager.AddEntity());
 
 Game::Game() {
-
 }
 
 Game::~Game() {
-
 }
 
 /// <summary>
@@ -28,7 +26,6 @@ Game::~Game() {
 /// <param name="height">Altura</param>
 /// <param name="fullscreen">Flag Fullscreen</param>
 void Game::Init(const char* title, int xpos, int ypos, int widht, int height, bool fullscreen) {
-
 	int flags = 0;
 	if (fullscreen) {
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -84,7 +81,13 @@ void Game::Update() {
 	manager.Refresh();
 	manager.Update();
 
-	std::cout << "Player Position: " << player.GetComponent<TransformComponent>().x() << "," << player.GetComponent<TransformComponent>().y() << std::endl;
+	player.GetComponent<TransformComponent>().position.Add(Vector2D(1, 1));
+
+	if (player.GetComponent<TransformComponent>().position.x > 50) {
+		player.GetComponent<SpriteComponent>().SetTex("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Jump (32x32).png");
+	}
+
+	std::cout << "Player Position: " << player.GetComponent<TransformComponent>().position.x << "," << player.GetComponent<TransformComponent>().position.y << std::endl;
 }
 
 /// <summary>

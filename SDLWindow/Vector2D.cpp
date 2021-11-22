@@ -1,6 +1,5 @@
 #include "Vector2D.h"
 
-
 Vector2D::Vector2D()
 {
 	x = 0.0f;
@@ -41,7 +40,6 @@ Vector2D& Vector2D::Divide(const Vector2D vec)
 	return *this;
 }
 
-
 Vector2D& operator+(Vector2D& v1, Vector2D& v2)
 {
 	return v1.Add(v2);
@@ -58,7 +56,6 @@ Vector2D& operator/(Vector2D& v1, Vector2D& v2)
 {
 	return v1.Divide(v2);
 }
-
 
 Vector2D& Vector2D::operator+=(const Vector2D& vec)
 {
