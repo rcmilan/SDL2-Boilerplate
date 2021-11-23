@@ -19,7 +19,7 @@ inline ComponentID GetComponentTypeID()
 	return lastId++;
 }
 
-template <typename T> inline inline ComponentID GetComponentTypeID() noexcept
+template <typename T> inline ComponentID GetComponentTypeID() noexcept
 {
 	static_assert (std::is_base_of<Component, T>::value, "");
 	static ComponentID typeID = GetComponentTypeID();
