@@ -6,7 +6,7 @@
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
-
+SDL_Event Game::evt;
 Manager manager;
 auto& player(manager.AddEntity());
 
@@ -55,14 +55,14 @@ void Game::Init(const char* title, int xpos, int ypos, int widht, int height, bo
 	map = new Map();
 
 	player.AddComponent<TransformComponent>();
-	player.AddComponent<SpriteComponent>("C:/Users/Diogo/Downloads/Free/Main Characters/Ninja Frog/Jump (32x32).png");
+	player.AddComponent<SpriteComponent>("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Jump (32x32).png");
+	player.AddComponent<KeyboardController>();
 }
 
 /// <summary>
 /// Trata eventos do SDL
 /// </summary>
 void Game::HandleEvents() {
-	SDL_Event evt;
 	SDL_PollEvent(&evt);
 
 	switch (evt.type) {
@@ -81,13 +81,7 @@ void Game::Update() {
 	manager.Refresh();
 	manager.Update();
 
-	player.GetComponent<TransformComponent>().position.Add(Vector2D(1, 1));
-
-	if (player.GetComponent<TransformComponent>().position.x > 50) {
-		player.GetComponent<SpriteComponent>().SetTex("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Jump (32x32).png");
-	}
-
-	std::cout << "Player Position: " << player.GetComponent<TransformComponent>().position.x << "," << player.GetComponent<TransformComponent>().position.y << std::endl;
+	//std::cout << "Player Position: " << player.GetComponent<TransformComponent>().position.x << "," << player.GetComponent<TransformComponent>().position.y << std::endl;
 }
 
 /// <summary>

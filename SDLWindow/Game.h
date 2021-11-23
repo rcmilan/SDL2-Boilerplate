@@ -18,6 +18,7 @@ public:
 	bool Running() { return isRunning; };
 
 	static SDL_Renderer* renderer;
+	static SDL_Event evt;
 
 private:
 	bool isRunning;
