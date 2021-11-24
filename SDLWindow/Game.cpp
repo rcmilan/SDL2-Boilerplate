@@ -35,8 +35,6 @@ void Game::Init(const char* title, int xpos, int ypos, int widht, int height, bo
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
-	isRunning = false;
-
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		std::cout << "SDL Initialized..." << std::endl;

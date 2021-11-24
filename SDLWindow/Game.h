@@ -21,6 +21,6 @@ public:
 	static SDL_Event evt;
 
 private:
-	bool isRunning;
+	bool isRunning = false;
 	SDL_Window* window;
 };

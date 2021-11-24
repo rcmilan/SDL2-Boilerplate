@@ -96,6 +96,10 @@ private:
 	std::vector<std::unique_ptr<Entity>> entities;
 
 public:
+
+	/// <summary>
+	/// Executa o Update de cada entidade
+	/// </summary>
 	void Update()
 	{
 		for (auto& e : entities)
@@ -104,6 +108,9 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// Renderiza a entidade
+	/// </summary>
 	void Draw()
 	{
 		for (auto& e : entities)
@@ -112,9 +119,12 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// Itera por todas as entidades
+	/// Remove entidades inativas
+	/// </summary>
 	void Refresh()
 	{
-		//Remove entidades que não estão ativas
 		entities.erase(std::remove_if(std::begin(entities), std::end(entities),
 			[](const std::unique_ptr<Entity>& mEntity)
 			{

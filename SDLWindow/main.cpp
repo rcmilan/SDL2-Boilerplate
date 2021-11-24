@@ -23,15 +23,14 @@ int main(int argc, char* argv[])
 		game->Render();
 
 		frameTime = SDL_GetTicks() - frameStart;
-
 		if (frameDelay > frameTime)
 		{
+			// controla a taxa de FPS
 			SDL_Delay(frameDelay - frameTime);
 		}
 	}
 
 	game->Clean();
-	//game->~Game();
 
 	return 0;
 }

@@ -58,6 +58,9 @@ void Map::LoadMap(int arr[20][25])
 	}
 }
 
+/// <summary>
+/// Renderiza o Map
+/// </summary>
 void Map::DrawMap()
 {
 	int type = 0;

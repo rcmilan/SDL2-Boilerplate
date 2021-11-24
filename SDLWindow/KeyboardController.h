@@ -16,27 +16,29 @@ public:
 
 	void Update() override
 	{
-		if (Game::evt.type == SDL_KEYDOWN) {
-
-		}
-		switch (Game::evt.key.keysym.sym)
+		if (Game::evt.type == SDL_KEYDOWN)
 		{
-		case SDLK_w:
-			transform->velocity.y = -1;
-			break;
-		case SDLK_a:
-			transform->velocity.x = -1;
-			break;
-		case SDLK_s:
-			transform->velocity.y = 1;
-			break;
-		case SDLK_d:
-			transform->velocity.x = 1;
-			break;
-		default:
-			break;
+			switch (Game::evt.key.keysym.sym)
+			{
+			case SDLK_w:
+				transform->velocity.y = -1;
+				break;
+			case SDLK_a:
+				transform->velocity.x = -1;
+				break;
+			case SDLK_s:
+				transform->velocity.y = 1;
+				break;
+			case SDLK_d:
+				transform->velocity.x = 1;
+				break;
+			default:
+				break;
+			}
 		}
-		if (Game::evt.type == SDL_KEYUP) {
+
+		if (Game::evt.type == SDL_KEYUP)
+		{
 			switch (Game::evt.key.keysym.sym)
 			{
 			case SDLK_w:
