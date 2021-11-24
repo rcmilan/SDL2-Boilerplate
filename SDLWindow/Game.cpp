@@ -2,13 +2,17 @@
 #include "Map.h"
 #include "TextureManager.h"
 #include "Components.h"
+#include "Collision.h"
 
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::evt;
+
 Manager manager;
+
 auto& player(manager.AddEntity());
+auto& wall(manager.AddEntity());
 
 Game::Game() {
 }
