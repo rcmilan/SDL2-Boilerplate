@@ -169,7 +169,7 @@
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\Free\Main Characters\Ninja Frog\Jump (32x32).png" />
+    <Text Include="assets\map.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

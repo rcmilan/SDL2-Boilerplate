@@ -82,8 +82,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\Free\Main Characters\Ninja Frog\Jump (32x32).png">
+    <Text Include="assets\map.txt">
       <Filter>Resource Files</Filter>
-    </Image>
+    </Text>
   </ItemGroup>
 </Project>

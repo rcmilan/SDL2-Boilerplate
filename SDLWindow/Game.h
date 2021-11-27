@@ -21,7 +21,7 @@ public:
 
 	bool Running() { return isRunning; };
 
-
+	static void AddTile(int id, int x, int y);
 
 	static SDL_Renderer* renderer;
 	static SDL_Event evt;
