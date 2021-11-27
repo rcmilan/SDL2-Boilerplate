@@ -59,6 +59,11 @@ void Game::Init(const char* title, int xpos, int ypos, int widht, int height, bo
 	player.AddComponent<TransformComponent>();
 	player.AddComponent<SpriteComponent>("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Jump (32x32).png");
 	player.AddComponent<KeyboardController>();
+	player.AddComponent<ColliderComponent>("player");
+
+	wall.AddComponent<TransformComponent>(100.0f, 100.0f, 32, 32, 1);
+	wall.AddComponent<SpriteComponent>("C:/Users/Diogo/Downloads/Free/Background/Pink.png");
+	wall.AddComponent<ColliderComponent>("wall");
 }
 
 /// <summary>
@@ -82,6 +87,13 @@ void Game::HandleEvents() {
 void Game::Update() {
 	manager.Refresh();
 	manager.Update();
+
+	if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, wall.GetComponent<ColliderComponent>().collider)) {
+
+		auto w = player.GetComponent<TransformComponent>().position;
+
+		//std::cout << "Wall Hit" << " (" << w.x << "," << w.y << ")" << std::endl;
+	}
 
 	//std::cout << "Player Position: " << player.GetComponent<TransformComponent>().position.x << "," << player.GetComponent<TransformComponent>().position.y << std::endl;
 }
