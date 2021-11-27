@@ -11,8 +11,14 @@ SDL_Event Game::evt;
 
 Manager manager;
 
+std::vector<ColliderComponent*> Game::colliders;
+
 auto& player(manager.AddEntity());
 auto& wall(manager.AddEntity());
+
+auto& tile0(manager.AddEntity());
+auto& tile1(manager.AddEntity());
+auto& tile2(manager.AddEntity());
 
 Game::Game() {
 }
@@ -56,6 +62,15 @@ void Game::Init(const char* title, int xpos, int ypos, int widht, int height, bo
 
 	map = new Map();
 
+
+	tile0.AddComponent<TileComponent>(200, 200, 32, 32, 0);
+
+	tile1.AddComponent<TileComponent>(420, 420, 32, 32, 1);
+	tile1.AddComponent<ColliderComponent>("dirt");
+
+	tile2.AddComponent<TileComponent>(69, 69, 32, 32, 2);
+	tile2.AddComponent<ColliderComponent>("grass");
+
 	player.AddComponent<TransformComponent>();
 	player.AddComponent<SpriteComponent>("C:/Users/Diogo/Downloads/Free/Main Characters/Virtual Guy/Jump (32x32).png");
 	player.AddComponent<KeyboardController>();
@@ -85,17 +100,17 @@ void Game::HandleEvents() {
 /// Atualiza as coisas
 /// </summary>
 void Game::Update() {
+	Vector2D playerPos = player.GetComponent<TransformComponent>().position;
 	manager.Refresh();
 	manager.Update();
 
-	if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, wall.GetComponent<ColliderComponent>().collider)) {
+	for (auto cc : colliders)
+	{
+		Collision::AABB(player.GetComponent<ColliderComponent>(), *cc);
 
-		auto w = player.GetComponent<TransformComponent>().position;
-
-		//std::cout << "Wall Hit" << " (" << w.x << "," << w.y << ")" << std::endl;
 	}
 
-	//std::cout << "Player Position: " << player.GetComponent<TransformComponent>().position.x << "," << player.GetComponent<TransformComponent>().position.y << std::endl;
+
 }
 
 /// <summary>
@@ -106,7 +121,7 @@ void Game::Render() {
 	// Begin
 
 	// Renderizamos coisas aqui
-	map->DrawMap();
+	//map->DrawMap();
 	manager.Draw();
 
 	// End
